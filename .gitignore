@@ -1,0 +1,16 @@
+.dub
+docs.json
+__dummy.html
+docs/
+/razorfontexampleproject
+razorfontexampleproject.so
+razorfontexampleproject.dylib
+razorfontexampleproject.dll
+razorfontexampleproject.a
+razorfontexampleproject.lib
+razorfontexampleproject-test-*
+*.exe
+*.pdb
+*.o
+*.obj
+*.lst

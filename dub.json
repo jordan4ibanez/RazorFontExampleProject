@@ -1,0 +1,24 @@
+{
+	"authors": [
+		"jordan4ibanez"
+	],
+	"copyright": "Copyright © 2023, jordan4ibanez",
+	"dependencies": {
+		"arsd-official:png": "~>10.9.8",
+		"bindbc-glfw": "~>1.0.1",
+		"bindbc-opengl": "~>1.0.4",
+		"delta_time": "~>1.0.5",
+		"doml": "~>1.0.1",
+		"razorfont": "~>0.9.9"
+	},
+	"description": "A tutorial on how to user RazorFont.",
+	"libs-posix": [
+		"z"
+	],
+	"license": "MIT",
+	"name": "razorfontexampleproject",
+	"versions": [
+		"GLFW_33",
+		"GL_41"
+	]
+}
