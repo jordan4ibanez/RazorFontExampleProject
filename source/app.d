@@ -11,7 +11,7 @@ import doml.vector_2d;
 
 void main()
 {
-	// Window controls OpenGL and GLFW - general setup for opengl
+    // Window controls OpenGL and GLFW - general setup for opengl
     Window.initialize();
     Window.setTitle("BlockModel Editor");
 
