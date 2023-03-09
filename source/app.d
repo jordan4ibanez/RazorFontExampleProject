@@ -112,6 +112,7 @@ void main()
         Font.setCanvasSize(Window.getWidth, Window.getHeight);
 
         // More GL things
+        // The gui matrix is just a simple ortholinear matrix4x4 in case you're wondering
         Shader.setUniformMatrix4("2d", "cameraMatrix", Camera.updateGuiMatrix());
         Shader.setUniformMatrix4("2d", "objectMatrix", Camera.setGuiObjectMatrix(Vector2d(0,0)) );
 
