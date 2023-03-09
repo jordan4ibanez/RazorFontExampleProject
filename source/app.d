@@ -183,12 +183,12 @@ void main()
         */
         string magnumOpusText = "this text is beautiful";
         Font.renderToCanvas(Window.getWidth / 2, Window.getHeight / 2, 54, magnumOpusText);
-        Font.renderToCanvas(0, 0, 54, magnumOpusText);
 
         /**
         Now one more thing, we're not going to use our fancy delegate function
-        we supplied to RazorFont at the beginning of the program. Nahhhh. What
-        if we want to be crazy and have each string be a new render call?
+        we supplied to RazorFont at the beginning of the program.
+        
+        Nahhhh. What if we want to be crazy and have each string be a new render call?
 
         I'm just kidding. This is useful for debugging!
 
@@ -196,8 +196,54 @@ void main()
         RazorFont's cache without automating it. :)
         */
 
+        Font.RazorFontData data = Font.flush();
+
+        /**
+        BAM! Now we have the vertex, texture, and indices data of "this text is beautiful"
+
+        now, let's use it.
+        */
+        Mesh myCoolText2 = new Mesh()
+            .addVertices2d(data.vertexPositions)
+            .addIndices(data.indices)
+            .addTextureCoordinates(data.textureCoordinates)
+            .setTexture(Texture.getTexture("example_fonts/test_font.png"))
+            .finalize();
+
+        myCoolText2.render("2d");
+
+        myCoolText2.cleanUp();
 
 
+        /**
+        Very fancy, very fancy.
+
+        You could use this to create a MEGA buffer if you want!
+
+        So the next thing is going to be something kinda cool. If your font
+        is missing glyphs (characters) the library won't crash if it encounters them.
+        It will simply skip them!
+
+        I specifically made the test_font to miss ALL uppercase characters. You can see 
+        this in the window. This is rendered on the bottom left of the window.
+        */
+        string uhOh = "thIs is mIsSiNg leTtErs";
+        Font.RazorTextSize sizing = Font.getTextSize(34, uhOh);
+        Font.renderToCanvas(0,Window.getHeight - sizing.height, 34, uhOh);
+        Font.render();
+
+        /**
+        ths is msig letrs. A truer statement has never been spoken. Or rendered I guess.
+        This is simply so if someone tries to type in different langs into your text, or maybe
+        you were not feeling it, and are missing quite a few chars in your font, it will always 
+        maintain safety.
+        */
+
+
+        /**
+
+
+        */
 
         // Update the gl window yada yada
         Window.swapBuffers();
