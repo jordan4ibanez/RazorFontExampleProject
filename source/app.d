@@ -307,6 +307,10 @@ void main()
 
             myCoolText3d.cleanUp();
 
+            /**
+            Why yes, this is another reason you can directly flush out the buffer :D
+            */ 
+
         }
 
         // Update the gl window yada yada
