@@ -13,7 +13,7 @@ void main()
 {
     // Window controls OpenGL and GLFW - general setup for opengl
     Window.initialize();
-    Window.setTitle("BlockModel Editor");
+    Window.setTitle("RazorFont Example");
 
     // 2d reference shader, you can take this and run with it
     Shader.create("2d", "shaders/2d_vertex.vs", "shaders/2d_fragment.fs");
