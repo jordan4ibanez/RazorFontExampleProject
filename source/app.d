@@ -86,6 +86,12 @@ void main()
     // You've never seen this font before
     Font.createFont("example_fonts/totally_original", "mc", true);
 
+    // Hmm, I wonder why this variable is here? Maybe we'll find out later
+    double rotation = 0.0;
+
+    // A SECRET? Well okay then
+    aSecret();
+
     // Into the main loop we gooooo
     while (!Window.shouldClose()) {
 
@@ -241,9 +247,67 @@ void main()
 
 
         /**
+        So I wasn't going to do this part but I thought it would be neat to show you.
 
-
+        There is also another reason to flush() text.
+        
+        Change this to true to see :)
         */
+
+        if (true) {
+            import doml.vector_3d;
+            import delta_time;
+
+            calculateDelta();
+
+            rotation += getDelta() * 100;
+            if (rotation > 360.0) {
+                rotation -= 360.0;
+            }
+
+            Camera.clearDepthBuffer();
+
+            Shader.startProgram("3d");
+
+            Camera.setRotation(Vector3d(0,0,0));
+
+            Shader.setUniformMatrix4("3d", "cameraMatrix", Camera.updateCameraMatrix());
+
+            Shader.setUniformMatrix4("3d", "objectMatrix",
+                Camera.setObjectMatrix(
+                    Vector3d(0,0,-10),      // Translation
+                    Vector3d(0,rotation,0), // Rotation
+                    Vector3d(1,-1,1),       // Scale - Gotta flip that Y scale in 3d!
+                )
+            );
+
+            Font.selectFont("mc");
+
+            int fontSize = 1;
+            string textString = "Stop the room from spinning, ahhhh!";
+
+            Font.RazorTextSize textSize = Font.getTextSize(fontSize, textString);
+
+            // Pure center :D
+            double posX = (Window.getWidth / 2.0) - (textSize.width / 2.0);
+            double posY = (Window.getHeight / 2.0) - (textSize.height / 2.0);
+            Font.renderToCanvas(posX, posY, fontSize, textString);
+
+            Font.RazorFontData myCoolData3d =  Font.flush();
+
+            Mesh myCoolText3d = new Mesh()
+                .addVertices2d(myCoolData3d.vertexPositions)
+                .addIndices(myCoolData3d.indices)
+                .addTextureCoordinates(myCoolData3d.textureCoordinates)
+                // Oh wow I snuck in another feature woooo!
+                .setTexture(Texture.getTexture(Font.getCurrentFontTextureFileLocation()))
+                .finalize();
+
+            myCoolText3d.render("3d");
+
+            myCoolText3d.cleanUp();
+
+        }
 
         // Update the gl window yada yada
         Window.swapBuffers();
@@ -251,7 +315,74 @@ void main()
 
     // Just regular ol opengl cleanup
     Shader.deleteShader("2d");
+    Shader.deleteShader("3d");
     Texture.cleanUp();
     Window.destroy();
 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Did you read the tutorial before you snooped down here? :D
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// You caught me, I hid a 3d shader in here to show you something cool :P
+void aSecret() {
+    Shader.create("3d", "libs/regular_vertex.vs", "libs/regular_fragment.fs");
+    Shader.createUniform("3d", "cameraMatrix");
+    Shader.createUniform("3d", "objectMatrix");
+    Shader.createUniform("3d", "textureSampler");
 }
