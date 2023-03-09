@@ -136,6 +136,8 @@ void main()
             /**
             You can easily get the width and height of a section of text by doing
             this! It essentially does a "dry render" without setting anything internally.
+            RazorTextSize is a struct that allows this to be truly generic, not
+            interfering with your favorite math library!
             */
             Font.RazorTextSize textSize = Font.getTextSize(fontSize, textString);
 
@@ -156,7 +158,6 @@ void main()
             double posY = (Window.getHeight / 2.0) - (textSize.height / 2.0) - 50;
 
             Font.renderToCanvas(posX, posY, fontSize, textString);
-
         }
 
         /**
@@ -168,7 +169,34 @@ void main()
         */
         Font.render();
 
+        // So let's select my magnum opus
+        Font.selectFont("cool");
+
+        /**
+        And we'll do the fanciness explained above.
+
+        But I want to explain something simple:
         
+        So the top left of the text is the root position of it.
+        So when you run this, I want you to observe that this text is
+        rooted (top left) at the exact center of your window no matter what! 
+        */
+        string magnumOpusText = "this text is beautiful";
+        Font.renderToCanvas(Window.getWidth / 2, Window.getHeight / 2, 54, magnumOpusText);
+        Font.renderToCanvas(0, 0, 54, magnumOpusText);
+
+        /**
+        Now one more thing, we're not going to use our fancy delegate function
+        we supplied to RazorFont at the beginning of the program. Nahhhh. What
+        if we want to be crazy and have each string be a new render call?
+
+        I'm just kidding. This is useful for debugging!
+
+        So now, I will show you how to extract the information straight from 
+        RazorFont's cache without automating it. :)
+        */
+
+
 
 
         // Update the gl window yada yada
