@@ -355,10 +355,3 @@ class Mesh {
         return this.size.y;
     }
 }
-
-class EmptyTestObject {
-    int hi = 1;
-    int getHi() {
-        return hi;
-    }
-}
