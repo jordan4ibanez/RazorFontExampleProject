@@ -9,7 +9,7 @@
 		"bindbc-opengl": "~>1.0.4",
 		"delta_time": "~>1.0.5",
 		"doml": "~>1.0.1",
-		"razorfont": "~>0.9.9"
+		"razorfont": "~>1.2.1"
 	},
 	"description": "A tutorial on how to user RazorFont.",
 	"libs-posix": [
